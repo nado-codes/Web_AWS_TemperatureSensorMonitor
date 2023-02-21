@@ -1,0 +1,58 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "test backend",
+      "group": "test",
+      "command": "dotnet test ${workspaceFolder}\\Tapknack_Tests",
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "build backend",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "build",
+        "${workspaceFolder}/Backend/Backend.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "type": "shell",
+      "label": "start backend",
+      "command": "dotnet run --project ${workspaceFolder}\\Backend"
+    },
+    {
+      "type": "shell",
+      "label": "watch backend",
+      "command": "dotnet watch --project ${workspaceFolder}\\Backend"
+    },
+    {
+      "type": "shell",
+      "label": "start frontend",
+      "command": "npm start",
+      "options": {
+        "cwd": "${workspaceFolder}/Frontend"
+      }
+    },
+    {
+      "label": "start",
+      "dependsOn": ["start backend", "start frontend"]
+    },
+    {
+      "label": "publish",
+      "command": "dotnet",
+      "type": "process",
+      "args": [
+        "publish",
+        "${workspaceFolder}/Backend/Backend.csproj",
+        "/property:GenerateFullPaths=true",
+        "/consoleloggerparameters:NoSummary"
+      ],
+      "problemMatcher": "$msCompile"
+    }
+  ]
+}
